@@ -1,0 +1,102 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>analog clock</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Poiret+One&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- font-family: 'Poiret One', cursive; -->
+    <div class="clock">
+      <div>
+        <div class="date"></div>
+        <div class="day"></div>
+      </div>
+
+      <div class="dot"></div>
+
+      <div>
+        <div class="hour-hand"></div>
+        <div class="minute-hand"></div>
+        <div class="second-hand"></div>
+      </div>
+      <div>
+        <span class="h3">3</span>
+        <span class="h6">6</span>
+        <span class="h9">9</span>
+        <span class="h12">12</span>
+      </div>
+      <div class="diallines"></div>
+    </div>
+
+
+
+
+    <script>
+    
+    let diallines = document.getElementsByClassName('diallines');
+    let clockE1 = document.getElementsByClassName('clock')[0];
+
+    for(let i = 1; i <60; i++){
+        clockE1.innerHTML += `<div class='diallines'></div>`;
+        diallines[i].style.transform = "rotate(" + 6 * i + "deg)";
+    }
+
+    function clock(){
+        let weekday = new Array(7),
+        d = new Date(),
+        h = d.getHours(),
+        m = d.getMinutes(),
+        s = d.getSeconds(),
+        date = d.getDate(),
+        month = d.getMonth()+1;
+        year = d.getFullYear(),
+
+        hDeg = h * 30 + m * (360/720),
+        mDeg = m * 30 + s * (360/720),
+        sDeg = s * 6
+
+        hE1 = document.querySelector('.hour-hand'),
+        mE1 = document.querySelector('.minute-hand'),
+        sE1 = document.querySelector('.second-hand'),
+        dateE1 = document.querySelector('.date'),
+        dayE1 = document.querySelector('.day');
+
+        weekday[0] = "sunday";
+        weekday[1] = "monday";
+        weekday[2] = "tuesday";
+        weekday[3] = "wednesday";
+        weekday[4] = "thursday";
+        weekday[5] = "friday";
+        weekday[6] = "saturday";
+
+        let day = weekday[new Date().getDay()];
+        hE1.style.transform = "rotate("+hDeg + "deg)";
+        mE1.style.transform = "rotate("+mDeg + "deg)";
+        sE1.style.transform = "rotate("+sDeg + "deg)";
+        dateE1.innerHTML = date+"/"+month+"/"+year;
+        dayE1.innerHTML = day;
+        
+    }
+
+    setInterval("clock()", 100);
+    
+    
+    
+    
+    </script>
+  </body>
+</html>
